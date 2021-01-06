@@ -1,12 +1,12 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Dimensions, ScrollView, PermissionsAndroid , TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, Dimensions, ScrollView, PermissionsAndroid, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import MapView, { Callout, Circle, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import * as Location from 'expo-location';
 import firebase from '../../firebase/firebase';
-
+import googleapi from '../../API/googleApi'
 
 const win = Dimensions.get('window');
 
@@ -49,7 +49,8 @@ export default class MapsComponent extends Component {
     }
 
     getPlaces() {
-        const url = this.getUrlWithParam(this.state.lat, this.state.long, 90000, 'store', 'AIzaSyCEBH6-bCH58atCkrjz28oqDB2QXpulddI');
+        const apikey = googleapi.api;
+        const url = this.getUrlWithParam(this.state.lat, this.state.long, 90000, 'store', apikey);
         console.log("asdasda")
         fetch(url)
             .then((data) => data.json())
@@ -88,7 +89,7 @@ export default class MapsComponent extends Component {
     }
 
     handleInfo() {
-        this.setState({open:false})
+        this.setState({ open: false })
         this.props.navigation.navigate("Info")
     }
 
@@ -127,13 +128,13 @@ export default class MapsComponent extends Component {
                         <MaterialCommunityIcons name="close" size={35} color="black" onPress={() => this.onPressModal()} style={{ alignSelf: "flex-end", marginEnd: 15, marginTop: 15 }} />
 
                         <TouchableOpacity onPress={() => this.handleInfo()}>
-                            <Text style={{marginStart:15, fontWeight:"bold", fontSize:20, marginTop:30}}>
+                            <Text style={{ marginStart: 15, fontWeight: "bold", fontSize: 20, marginTop: 30 }}>
                                 Información de treinta
                             </Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity onPress={() => this.handleSignOut()}>
-                            <Text style={{marginStart:15, fontWeight:"bold", fontSize:20, marginTop:30}}>
+                            <Text style={{ marginStart: 15, fontWeight: "bold", fontSize: 20, marginTop: 30 }}>
                                 Cerrar sesión.
                             </Text>
                         </TouchableOpacity>

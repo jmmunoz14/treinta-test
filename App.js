@@ -45,6 +45,8 @@ export default class App extends Component {
         }}>
           <Stack.Screen name="Home" component={MainView} />
           <Stack.Screen name="Signin" component={Signin} />
+          <Stack.Screen name="Maps" component={MapsComponent} />
+
 
         </Stack.Navigator>) :
 
